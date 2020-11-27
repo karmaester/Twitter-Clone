@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -34,10 +33,25 @@
       </div>
       <div id="navbarExample" class="navbar-menu">
         <div class="navbar-end">
-          <div class="field is-grouped">
+          <div class="field is-grouped mt-1 mr-2">
             <p class="control">
               <%= link_to 'New Tweeet', new_tweeet_path, class: "button is-info is-inverted" %>
             </p>
+            <% if user_signed_in? %>
+            <p class="control">
+              <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
+            </p>
+            <p class="control">
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "button is-info" %>
+            </p>
+            <% else %>
+            <p class="control">
+              <%= link_to 'Sign in', new_user_session_path, class: "button is-info" %>
+            </p>
+            <p class="control">
+              <%= link_to 'Sign up', new_user_registration_path, class: "button is-info" %>
+            </p>
+            <% end %>
           </div>
         </div>
       </div>
